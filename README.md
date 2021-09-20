@@ -42,3 +42,6 @@ Detailed specifications:
 * Weight: 19g
 * Derivative of "[Arduino UNO R3 Reference design](http://www.arduino.cc/en/Main/ArduinoBoardUno)"
 * [Open source hardware files on github](https://github.com/adafruit/Adafruit-METRO-328-PCB)
+
+## PlateformIO
+These projects use [Visual Studio Code](https://code.visualstudio.com/) with [PlateformIO](https://platformio.org/) for development.
