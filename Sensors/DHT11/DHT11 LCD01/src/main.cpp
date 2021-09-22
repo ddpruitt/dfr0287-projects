@@ -34,7 +34,9 @@ void loop()
       /* all graphics commands have to appear within the loop body. */
       u8g2.setFont(u8g2_font_ncenB14_tr);
       u8g2.drawStr(0, 20, "Hello World!");
+      u8g2.setFont(u8g2_font_ncenR14_tr);
       u8g2.drawStr(0, 40, "Hello World!");
+      u8g2.setFont(u8g2_font_courR10_tr);
       u8g2.drawStr(0, 60, "Hello World!");
     } while (u8g2.nextPage());
     menu_redraw_required = 0;
