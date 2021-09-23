@@ -34,7 +34,8 @@ void setup()
 
 }
 
-int del = 100;
+// min delay is ~1110
+int del = 1500;
 uint32_t startRead = 0;
 uint32_t stopRead = 0;
 uint32_t startCycle = 0;
@@ -56,7 +57,7 @@ void loop()
     {
     case DHTLIB_OK:
       Serial.print("OK,\t\t");
-      //del -= 10;
+      del -= 10;
       break;
     case DHTLIB_ERROR_CHECKSUM:
       Serial.print("Checksum,\t");
