@@ -4,7 +4,7 @@
 
 ### DHT11
 
-<img src="../Documentation/Sensors/DHT11/Temperature_and_Humidity_Sensor.jpg" alt="DHT11" width="200"/>
+<img src="../Documentation/Sensors/Temperature/DHT11/Temperature_and_Humidity_Sensor.jpg" alt="DHT11" width="200"/>
 
 An inexpensive Temperature and Humidity sensor.  Testing was done with the DFRobot [DFR0067](https://wiki.dfrobot.com/DHT11_Temperature_and_Humidity_Sensor__SKU__DFR0067_).
 
@@ -13,6 +13,23 @@ An inexpensive Temperature and Humidity sensor.  Testing was done with the DFRob
 * Temperature range :0-50 °C error of ± 2 °C
 * Humidity :20-90% RH ± 5% RH error
 * Interface: Digital
+
+## LM35 Linear Temperature Sensor
+
+<img src="../Documentation/Sensors/Temperature/LM35/DFR0023.jpg" alt="DHT11" width="200"/>
+
+The LM35 chip is produced by National Semiconductor Corporation and offers a functional range between 0 degree Celsius to 100 degree Celsius with a sensitivity of 10mV per degree Celsius. The output voltage is proportional to the temperature.
+
+Testing done with the DFRobot [DFR0023](https://wiki.dfrobot.com/DFRobot_LM35_Linear_Temperature_Sensor__SKU_DFR0023_).
+
+* Sensor Chip Model: LM35
+* Supply Voltage: 3.3~5.0V
+* Sensor Chip Sensitivity: 10mV/℃
+* Measuring Range: 0~150℃
+* Precision: ±1℃
+* Connector Type: PH2.0-3P
+* Dimension: 30x22 mm
+
 
 ## DFRobot Gravity: 37 PCS Sensor Set
 
