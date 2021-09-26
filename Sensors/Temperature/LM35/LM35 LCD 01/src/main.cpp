@@ -65,7 +65,7 @@ void read_sensors(void)
 
   char result[8]; // Buffer big enough for 7-character float
   dtostrf(dat, 4, 1, result);
-  u8g2.drawStr(0, 60, "TM35:");
+  u8g2.drawStr(0, 60, "LM35:");
   u8g2.drawStr(90, 60, result);
 
 }
