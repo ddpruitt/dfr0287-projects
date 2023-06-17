@@ -45,3 +45,9 @@ Detailed specifications:
 
 ## PlateformIO
 These projects use [Visual Studio Code](https://code.visualstudio.com/) with [PlateformIO](https://platformio.org/) for development.
+
+## 3D Printed Case
+
+[DFRobot DFR0287 Case on Printables](https://www.printables.com/model/506880-dfrobot-dfr0287-case)
+
+![Case](./3D%20Models/DFR0287%20Case%203466.jpeg)
