@@ -34,7 +34,7 @@ void read_sensors(void)
     u8g2.drawStr(90, 30, humidityResult);
 
     char temperatureResult[5];
-    dtostrf(DHT.temperature, 4, 1, temperatureResult);
+    dtostrf((1.8*DHT.temperature + 32), 4, 1, temperatureResult);
     u8g2.drawStr(0, 45, "DHT11:");
     u8g2.drawStr(90, 45, temperatureResult);
     break;
@@ -64,7 +64,7 @@ void read_sensors(void)
   dat = (double) tm35Val * (5/10.24);
 
   char result[8]; // Buffer big enough for 7-character float
-  dtostrf(dat, 4, 1, result);
+  dtostrf((1.8*dat + 32), 4, 1, result);
   u8g2.drawStr(0, 60, "LM35:");
   u8g2.drawStr(90, 60, result);
 
