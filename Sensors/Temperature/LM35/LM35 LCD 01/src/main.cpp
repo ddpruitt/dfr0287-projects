@@ -68,15 +68,22 @@ void read_sensors(void)
   u8g2.drawStr(0, 60, "LM35:");
   u8g2.drawStr(90, 60, result);
 
+  // Attempting to work with MQ-7, but it is a bit more complicated than this.
+  // int val;
+  // val=analogRead(A2);//Read Gas value from analog 1
+  // Serial.println(val,DEC);//Print the value to serial port
+
 }
 
 void setup()
 {
   u8g2.begin();
   u8g2.setDisplayRotation(U8G2_R2);
-  u8g2.setContrast(190);
+  u8g2.setContrast(50);
 
   menu_redraw_required = 1;
+
+  Serial.begin(9600);
 }
 
 void loop()
