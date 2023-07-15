@@ -13,6 +13,17 @@
 */
 
 #include <GEM_u8g2.h>
+#include "SerialKey.h"
+
+// w (119) -> ↑
+// d (100) -> →
+// s (115) -> ↓
+// a (97) -> ←
+// q (113) -> cancel
+// e (101) -> ok
+SerialKey serialKey(/*Up=*/119, /*Right/Next=*/100,
+                    /*Down=*/115, /*Left/Prev=*/97,
+                    /*Home/Cancel=*/113, /*Select/OK=*/101);
 
 // Create an instance of the U8g2 library.
 // Use constructor that matches your setup (see https://github.com/olikraus/u8g2/wiki/u8g2setupcpp for details).
@@ -56,9 +67,6 @@ void setup() {
   // Serial communication setup
   Serial.begin(115200);
 
-  // U8g2 library init. Pass pin numbers the buttons are connected to.
-  // The push-buttons should be wired with pullup resistors (so the LOW means that the button is pressed)
-  //u8g2.begin(/*Select/OK=*/ 7, /*Right/Next=*/ 4, /*Left/Prev=*/ 3, /*Up=*/ 5, /*Down=*/ 2, /*Home/Cancel=*/ 6);
   u8g2.begin();
   u8g2.setDisplayRotation(U8G2_R2);
   u8g2.setContrast(50);
@@ -73,10 +81,11 @@ void setup() {
 void loop() {
   // If menu is ready to accept button press...
   if (menu.readyForKey()) {
-    // ...detect key press using U8g2 library
-    // and pass pressed button to menu
-    menu.registerKeyPress(u8g2.getMenuEvent());
+    serialKey.detect();
+    menu.registerKeyPress(serialKey.trigger);
   }
+
+  delay(100);
 }
 
 void printData() {
