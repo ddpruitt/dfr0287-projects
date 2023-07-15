@@ -93,7 +93,7 @@ void uiStep(void)
       oldkey = key;
     }
   }
-  delay(100);
+  delay(150);
 }
 
 
@@ -152,8 +152,6 @@ void loop() {
 
   //   menu.registerKeyPress();
   // }
-
-  delay(100);
 }
 
 void printData() {
