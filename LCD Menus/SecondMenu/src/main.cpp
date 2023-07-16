@@ -55,7 +55,7 @@ void setupMenu() {
 
 void setup() {
   // Serial communication setup
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   u8g2.begin();
   u8g2.setDisplayRotation(U8G2_R2);
