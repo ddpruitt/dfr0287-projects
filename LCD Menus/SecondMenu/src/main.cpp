@@ -11,8 +11,11 @@
   
   This example code is in the public domain.
 */
-#include <Gem_u8g2.h>
 #include "JoystickKey.h"
+#include <Gem_u8g2.h>
+
+// JoystickKey setup apperently needs to happen before creating the u8g2 menus.
+JoystickKey joystickKey(GEM_KEY_UP, GEM_KEY_RIGHT, GEM_KEY_DOWN, GEM_KEY_LEFT, GEM_KEY_OK, GEM_KEY_NONE);
 
 // Create an instance of the U8g2 library.
 // Use constructor that matches your setup (see https://github.com/olikraus/u8g2/wiki/u8g2setupcpp for details).
@@ -21,7 +24,6 @@
 // Please update the pin numbers according to your setup. Use U8X8_PIN_NONE if the reset pin is not connected
 U8G2_ST7565_NHD_C12864_F_4W_SW_SPI u8g2(U8G2_R0, /* clock=*/13, /* data=*/11, /* cs=*/10, /* dc=*/9, /* reset=*/8);
 
-JoystickKey joystickKey(GEM_KEY_UP, GEM_KEY_RIGHT, GEM_KEY_DOWN, GEM_KEY_LEFT, GEM_KEY_OK, GEM_KEY_NONE);
 
 // Create variables that will be editable through the menu and assign them initial values
 int number = -512;
@@ -44,6 +46,7 @@ GEMPage menuPageMain("Main Menu");
 // Create menu object of class GEM_u8g2. Supply its constructor with reference to u8g2 object we created earlier
 GEM_u8g2 menu(u8g2);
 
+
 void setupMenu() {
   // Add menu items to menu page
   menuPageMain.addMenuItem(menuItemInt);
@@ -56,7 +59,7 @@ void setupMenu() {
 
 void setup() {
   // Serial communication setup
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   u8g2.begin();
   u8g2.setDisplayRotation(U8G2_R2);
@@ -70,11 +73,9 @@ void setup() {
 
 
 void loop() {
-
-  //menu.registerKeyPress(key);
-  // If menu is ready to accept button press...
-  if (menu.readyForKey()) {
+if (menu.readyForKey()) {
     joystickKey.detect();
+    Serial.println(joystickKey.trigger);
     menu.registerKeyPress(joystickKey.trigger);
   }
   delay(150);
