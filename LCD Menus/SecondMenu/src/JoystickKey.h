@@ -28,7 +28,7 @@ class JoystickKey {
         unsigned int _right = 700;
         unsigned int _down  = 500;
         unsigned int _left  = 100;
-        unsigned int _ok    = 500;
+        unsigned int _ok    = 300;
 
         byte get_key(unsigned int input);
 };
