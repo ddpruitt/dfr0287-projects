@@ -11,6 +11,7 @@
   
   This example code is in the public domain.
 */
+#include <Gem_u8g2.h>
 #include "JoystickKey.h"
 
 // Create an instance of the U8g2 library.
@@ -20,7 +21,7 @@
 // Please update the pin numbers according to your setup. Use U8X8_PIN_NONE if the reset pin is not connected
 U8G2_ST7565_NHD_C12864_F_4W_SW_SPI u8g2(U8G2_R0, /* clock=*/13, /* data=*/11, /* cs=*/10, /* dc=*/9, /* reset=*/8);
 
-JoystickKey joystickKey;
+JoystickKey joystickKey(GEM_KEY_UP, GEM_KEY_RIGHT, GEM_KEY_DOWN, GEM_KEY_LEFT, GEM_KEY_OK, GEM_KEY_NONE);
 
 // Create variables that will be editable through the menu and assign them initial values
 int number = -512;
