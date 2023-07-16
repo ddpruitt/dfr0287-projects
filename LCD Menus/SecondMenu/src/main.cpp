@@ -11,7 +11,10 @@
   
   This example code is in the public domain.
 */
-#include "JoystickKey.h"
+#include <Arduino.h>
+#include <KeyDetector.h>
+#include <GEM_u8g2.h>
+
 
 // Create an instance of the U8g2 library.
 // Use constructor that matches your setup (see https://github.com/olikraus/u8g2/wiki/u8g2setupcpp for details).
@@ -20,7 +23,11 @@
 // Please update the pin numbers according to your setup. Use U8X8_PIN_NONE if the reset pin is not connected
 U8G2_ST7565_NHD_C12864_F_4W_SW_SPI u8g2(U8G2_R0, /* clock=*/13, /* data=*/11, /* cs=*/10, /* dc=*/9, /* reset=*/8);
 
-JoystickKey joystickKey;
+const byte potPin = A0; 
+//Key keys[] = {{GEM_KEY_LEFT, potPin, 100}, {GEM_KEY_OK, potPin, 300}, {GEM_KEY_DOWN, potPin, 500}, {GEM_KEY_RIGHT, potPin, 700}, {GEM_KEY_UP, potPin, 900}};
+Key keys[] = {{GEM_KEY_LEFT, potPin, 0}, {GEM_KEY_OK, potPin, 200}, {GEM_KEY_DOWN, potPin, 400}, {GEM_KEY_RIGHT, potPin, 600}, {GEM_KEY_UP, potPin, 800}};
+
+KeyDetector myKeyDetector(keys, sizeof(keys)/sizeof(Key), 50, 50);
 
 // Create variables that will be editable through the menu and assign them initial values
 int number = -512;
@@ -55,7 +62,7 @@ void setupMenu() {
 
 void setup() {
   // Serial communication setup
-  Serial.begin(115200);
+  Serial.begin(9600);
 
   u8g2.begin();
   u8g2.setDisplayRotation(U8G2_R2);
@@ -65,17 +72,24 @@ void setup() {
   menu.init();
   setupMenu();
   menu.drawMenu();
+
 }
 
+int adc_key_in = 0;
 
 void loop() {
 
-  //menu.registerKeyPress(key);
+  // adc_key_in = analogRead(0);
+  // Serial.println(adc_key_in);
+
+  // myKeyDetector.detect();
+  // Serial.println(myKeyDetector.trigger);
   // If menu is ready to accept button press...
-  if (menu.readyForKey()) {
-    joystickKey.detect();
-    menu.registerKeyPress(joystickKey.trigger);
-  }
+  //if (menu.readyForKey()) {
+    myKeyDetector.detect();
+    Serial.println(myKeyDetector.trigger);
+    menu.registerKeyPress(myKeyDetector.trigger);
+  //}
   delay(150);
 }
 
