@@ -13,6 +13,8 @@
 */
 #include "JoystickKey.h"
 
+JoystickKey joystickKey;
+
 // Create an instance of the U8g2 library.
 // Use constructor that matches your setup (see https://github.com/olikraus/u8g2/wiki/u8g2setupcpp for details).
 // This instance is used to call all the subsequent U8g2 functions (internally from GEM library,
@@ -20,7 +22,6 @@
 // Please update the pin numbers according to your setup. Use U8X8_PIN_NONE if the reset pin is not connected
 U8G2_ST7565_NHD_C12864_F_4W_SW_SPI u8g2(U8G2_R0, /* clock=*/13, /* data=*/11, /* cs=*/10, /* dc=*/9, /* reset=*/8);
 
-JoystickKey joystickKey;
 
 // Create variables that will be editable through the menu and assign them initial values
 int number = -512;
