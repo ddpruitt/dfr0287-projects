@@ -4,22 +4,16 @@ JoystickKey joystickKey;
 
 U8G2_ST7565_NHD_C12864_F_4W_SW_SPI u8g2(U8G2_R0, /* clock=*/13, /* data=*/11, /* cs=*/10, /* dc=*/9, /* reset=*/8);
 
-// Create variables that will be editable through the menu and assign them initial values
-int interval = 200;
-
-// Supplementary variables used for animation control
-unsigned long previousMillis = 0;
-
 
 // Create menu button that will trigger rock() function. It will run animation sequence.
 // We will write (define) this function later. However, we should
 // forward-declare it in order to pass to GEMItem constructor
 void rock(); // Forward declaration
-GEMItem menuItemButton("Let's Rock!", rock);
+GEMItem menuItemButton("Open SubMenu 01", rock);
 
 // Create menu page object of class GEMPage. Menu page holds menu items (GEMItem) and represents menu level.
 // Menu can have multiple menu pages (linked to each other) with multiple menu items each
-GEMPage menuPageMain("Party Hard");
+GEMPage menuPageMain("Submenus and Pages");
 
 // Create menu object of class GEM_u8g2. Supply its constructor with reference to u8g2 object we created earlier
 GEM_u8g2 menu(u8g2);
@@ -49,46 +43,43 @@ void setup() {
 
 
 void loop() {
-  // If menu is ready to accept button press...
-  //if (menu.readyForKey()) {
-    joystickKey.detect();
-    //Serial.println(joystickKey.trigger);
-    menu.registerKeyPress(joystickKey.trigger);
-  //}
-
+  joystickKey.detect();
+  menu.registerKeyPress(joystickKey.trigger);
   delay(150);
 }
 
-// --- Animation draw routines
-
-
-// --- Animation context routines
-// Invoked once when the button is pressed
 void rockContextEnter() {
   // Clear sreen
   u8g2.clear();
-  // Draw initial frame for the case of manual navigation ("Manual" tempo preset)
-  if (interval == 0) {
-  }
-  Serial.println("Partying hard is in progress!");
+  u8g2.setFont(u8g2_font_ncenB10_tr);
+  u8g2.drawStr(0, 15, "SubMenu 01");
+  u8g2.nextPage();
+  Serial.println("Opening SubMenu 01");
 }
 
 // Invoked every loop iteration
 void rockContextLoop() {
+  // Manual mode.
+  // Check pressed keys and navigate through frames accordingly
   // Detect key press manually using joystickKey
+  joystickKey.detect();
   byte key = joystickKey.trigger;
-    // Manual mode.
-    // Check pressed keys and navigate through frames accordingly
   switch (key) {
     case GEM_KEY_OK:
-    Serial.println("Menu Exit");
+    Serial.println("Key OK - SubMenu Exit");
       menu.context.exit();
       break;
     case GEM_KEY_RIGHT:
-      Serial.println("Key Right");
+      Serial.println("Right");
       break;
     case GEM_KEY_LEFT:
-      Serial.println("Key Left");
+      Serial.println("Left");
+      break;
+    case GEM_KEY_UP:
+      Serial.println("Up");
+      break;
+    case GEM_KEY_DOWN:
+      Serial.println("Down");
       break;
   }
 }
@@ -101,6 +92,7 @@ void rockContextExit() {
   menu.clearContext();
   u8g2.setContrast(50);
 }
+
 // Setup context
 void rock() {
   menu.context.loop = rockContextLoop;
