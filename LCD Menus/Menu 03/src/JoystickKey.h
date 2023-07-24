@@ -22,7 +22,7 @@ class JoystickKey {
     //
 
     private:
-        int adc_key_in;
+        unsigned int adc_key_in;
 
         unsigned int _up    = 900;
         unsigned int _right = 700;

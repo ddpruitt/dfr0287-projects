@@ -7,11 +7,13 @@ JoystickKey::JoystickKey(){}
 
 void JoystickKey::detect(){
     adc_key_in = analogRead(0);     // read the value from the sensor
+    
     trigger = get_key(adc_key_in);  // convert into key press
     if (trigger != current)         // if keypress is detected
     {
-        delay(50);                      // wait for debounce time
+        delay(75);                      // wait for debounce time
         adc_key_in = analogRead(0);     // read the value from the sensor
+        
         trigger = get_key(adc_key_in);  // convert into key press
         if (trigger != current)
         {
