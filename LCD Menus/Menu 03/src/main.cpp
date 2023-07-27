@@ -5,7 +5,6 @@ JoystickKey joystickKey;
 U8G2_ST7565_NHD_C12864_F_4W_SW_SPI u8g2(U8G2_R0, /* clock=*/13, /* data=*/11, /* cs=*/10, /* dc=*/9, /* reset=*/8);
 uint8_t screen_redraw_required = 0;
 
-
 void subMenu01(); // Forward declaration
 void subMenu01ContextEnter();
 void subMenu01ContextLoop();
@@ -27,23 +26,31 @@ GEMPage menuPageMain("SubMenus and Pages");
 GEM_u8g2 menu(u8g2);
 
 // ---
-void setupMenu() {
+void setupMenu()
+{
   menuPageMain.addMenuItem(menuItemButton01);
   menuPageMain.addMenuItem(menuItemButton02);
   menu.setMenuPageCurrent(menuPageMain);
 }
 
-void subMenu01ContextEnter() {
+void subMenu01ContextEnter()
+{
   // Clear sreen
   u8g2.clear();
   screen_redraw_required = 1;
-  Serial.println("Opening SubMenu 01");
+  // Serial.println(F("Opening SubMenu 01"));
 }
 
 // Invoked every loop iteration
-void subMenu01ContextLoop() {
-  
-if (screen_redraw_required != 0)
+void subMenu01ContextLoop()
+{
+  // Serial.print(F("screen_redraw_required: "));
+  // Serial.print(screen_redraw_required);
+
+  // Serial.print(F(", trigger: "));
+  // Serial.println(joystickKey.trigger);
+
+  if (screen_redraw_required != 0)
   {
     u8g2.firstPage();
     do
@@ -57,34 +64,36 @@ if (screen_redraw_required != 0)
       // Detect key press manually using joystickKey
       joystickKey.detect();
       byte key = joystickKey.trigger;
-      switch (key) {
-        case GEM_KEY_OK:
-        Serial.println("Key OK - SubMenu Exit");
-          menu.context.exit();
-          break;
-        case GEM_KEY_RIGHT:
-          u8g2.drawStr(0, 30, "Right");
-          break;
-        case GEM_KEY_LEFT:
-          u8g2.drawStr(0, 30, "Left");
-          break;
-        case GEM_KEY_UP:
-          u8g2.drawStr(0, 30, "Up");
-          break;
-        case GEM_KEY_DOWN:
-          u8g2.drawStr(0, 30, "Down");
-          break;
+      switch (key)
+      {
+      case GEM_KEY_OK:
+        // Serial.println(F("Key OK - SubMenu Exit"));
+        menu.context.exit();
+        break;
+      case GEM_KEY_RIGHT:
+        u8g2.drawStr(0, 30, "Right");
+        break;
+      case GEM_KEY_LEFT:
+        u8g2.drawStr(0, 30, "Left");
+        break;
+      case GEM_KEY_UP:
+        u8g2.drawStr(0, 30, "Up");
+        break;
+      case GEM_KEY_DOWN:
+        u8g2.drawStr(0, 30, "Down");
+        break;
       }
 
     } while (u8g2.nextPage());
     screen_redraw_required = 0;
   }
   delay(100);
-  screen_redraw_required = 1;  
+  screen_redraw_required = 1;
 }
 
 // Invoked once when the GEM_KEY_CANCEL key is pressed
-void subMenu01ContextExit() {
+void subMenu01ContextExit()
+{
   // Draw menu back on screen and clear context
   menu.reInit();
   menu.drawMenu();
@@ -93,7 +102,8 @@ void subMenu01ContextExit() {
 }
 
 // Setup context
-void subMenu01() {
+void subMenu01()
+{
   menu.context.loop = subMenu01ContextLoop;
   menu.context.enter = subMenu01ContextEnter;
   menu.context.exit = subMenu01ContextExit;
@@ -101,17 +111,19 @@ void subMenu01() {
   menu.context.enter();
 }
 
-void subMenu02ContextEnter() {
+void subMenu02ContextEnter()
+{
   // Clear sreen
   u8g2.clear();
   screen_redraw_required = 1;
-  Serial.println("Opening SubMenu 02");
+  // Serial.println(F("Opening SubMenu 02"));
 }
 
 // Invoked every loop iteration
-void subMenu02ContextLoop() {
-  
-if (screen_redraw_required != 0)
+void subMenu02ContextLoop()
+{
+
+  if (screen_redraw_required != 0)
   {
     u8g2.firstPage();
     do
@@ -125,34 +137,36 @@ if (screen_redraw_required != 0)
       // Detect key press manually using joystickKey
       joystickKey.detect();
       byte key = joystickKey.trigger;
-      switch (key) {
-        case GEM_KEY_OK:
-        Serial.println("Key OK - SubMenu Exit");
-          menu.context.exit();
-          break;
-        case GEM_KEY_RIGHT:
-          u8g2.drawStr(0, 30, "Right");
-          break;
-        case GEM_KEY_LEFT:
-          u8g2.drawStr(0, 30, "Left");
-          break;
-        case GEM_KEY_UP:
-          u8g2.drawStr(0, 30, "Up");
-          break;
-        case GEM_KEY_DOWN:
-          u8g2.drawStr(0, 30, "Down");
-          break;
+      switch (key)
+      {
+      case GEM_KEY_OK:
+        // Serial.println(F("Key OK - SubMenu Exit"));
+        menu.context.exit();
+        break;
+      case GEM_KEY_RIGHT:
+        u8g2.drawStr(0, 30, "Right");
+        break;
+      case GEM_KEY_LEFT:
+        u8g2.drawStr(0, 30, "Left");
+        break;
+      case GEM_KEY_UP:
+        u8g2.drawStr(0, 30, "Up");
+        break;
+      case GEM_KEY_DOWN:
+        u8g2.drawStr(0, 30, "Down");
+        break;
       }
 
     } while (u8g2.nextPage());
     screen_redraw_required = 0;
   }
   delay(100);
-  screen_redraw_required = 1;  
+  screen_redraw_required = 1;
 }
 
 // Invoked once when the GEM_KEY_CANCEL key is pressed
-void subMenu02ContextExit() {
+void subMenu02ContextExit()
+{
   // Draw menu back on screen and clear context
   menu.reInit();
   menu.drawMenu();
@@ -161,7 +175,8 @@ void subMenu02ContextExit() {
 }
 
 // Setup context
-void subMenu02() {
+void subMenu02()
+{
   menu.context.loop = subMenu02ContextLoop;
   menu.context.enter = subMenu02ContextEnter;
   menu.context.exit = subMenu02ContextExit;
@@ -169,13 +184,14 @@ void subMenu02() {
   menu.context.enter();
 }
 
-void setup() {
+void setup()
+{
   Serial.begin(9600);
 
   u8g2.begin();
   u8g2.setDisplayRotation(U8G2_R2);
   u8g2.setContrast(50);
-  
+
   // Menu init, setup and draw
   menu.init();
   setupMenu();
@@ -185,15 +201,12 @@ void setup() {
   joystickKey.trigger = GEM_KEY_NONE;
 }
 
-
-void loop() {
-  screen_redraw_required = 0;
-  if (menu.readyForKey()) {
+void loop()
+{
+  if (menu.readyForKey())
+  {
     joystickKey.detect();
     menu.registerKeyPress(joystickKey.trigger);
   }
   delay(150);
 }
-
-
-
