@@ -56,7 +56,7 @@ void setupMenu() {
 
 void setup() {
   // Serial communication setup
-  Serial.begin(9600);
+  Serial.begin(115200);
 
   u8g2.begin();
   u8g2.setDisplayRotation(U8G2_R2);
@@ -87,6 +87,6 @@ void printData() {
     Serial.print("Number is: ");
     Serial.println(number);
   } else {
-    Serial.println("Printing is disabled, sorry:(");
+    Serial.println(F("Printing is disabled, sorry:("));
   }
 }
