@@ -2,19 +2,16 @@
 #include <U8g2lib.h>
 #include <DFRobot_DHT11.h>
 #include "JoystickKey.h"
+#include "DFR0287.h"
 
-JoystickKey joystickKey;
-
-U8G2_ST7565_NHD_C12864_F_4W_SW_SPI u8g2(U8G2_R0, /* clock=*/13, /* data=*/11, /* cs=*/10, /* dc=*/9, /* reset=*/8);
-uint8_t screen_redraw_required = 0;
 uint8_t temp_refresh_required = 0;
 
-int dht11_temp = 0;
-int dht11_hum = 0;
-uint16_t tm35_temp = 0;
 
 #define DHT11_PIN 12 // Digital pin connected to the DHT sensor
 DFRobot_DHT11 DHT;
+int dht11_temp = 0;
+int dht11_hum = 0;
+uint16_t tm35_temp = 0;
 
 // min delay is ~1110
 uint32_t delayMS = 2000;
@@ -191,17 +188,13 @@ void setup()
 {
   Serial.begin(115200);
 
-  u8g2.begin();
-  u8g2.setDisplayRotation(U8G2_R2);
-  u8g2.setContrast(50);
+  setupDFR0287();
 
   // Menu init, setup and draw
   menu.init();
   setupMenu();
   menu.drawMenu();
 
-  joystickKey.current = GEM_KEY_NONE;
-  joystickKey.trigger = GEM_KEY_NONE;
 }
 
 void loop()
@@ -252,5 +245,5 @@ void read_dht11(void)
   u8g2.drawStr(0, 45, "LM35:");
   u8g2.drawStr(90, 45, tm35TempResult);
 
-  
+
 }
